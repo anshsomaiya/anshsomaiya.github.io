@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My p5.js Sketch</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+</head>
+<body>
+    <h1>My p5.js Sketch</h1>
+    <p>Here's a p5.js sketch I created:</p>
+    <div id="sketch-container"></div>
+</body>
+<script>
+    function setup() {
+        let canvas = createCanvas(400, 400);
+        canvas.parent('sketch-container');
+    }
+
+    function draw() {
+        background(220);
+       let scl, row, col;
+
+function setup() {
+  createCanvas(600, 600);
+  scl = 50;
+  row = height / scl;
+  col = width / scl;
+  noLoop();
+  drawGrid();
+}
+
+function draw() {
+  // Leave this empty since we are using drawGrid in setup.
+}
+
+function drawGrid() {
+  translate(scl / 2, scl / 2);
+  for (let i = 0; i < row; i++) {
+    for (let j = 0; j < col; j++) {
+      push();
+      translate(j * scl, i * scl);
+      drawRandomShape(); // Call a function to draw something at this location
+      pop();
+    }
+  }
+}
+
+function drawRandomShape() {
+  // Generate random numbers for various parameters
+  let shapeType = floor(random(3)); // Random shape type (0: ellipse, 1: rect, 2: triangle)
+  let size = random(scl * 0.2, scl * 0.8); // Random size
+  let fillColor = color(random(255), random(255), random(255), random(150, 200)); // Random fill color with alpha
+  let strokeColor = color(random(255), random(255), random(255)); // Random stroke color
+
+  // Set stroke and fill properties
+  stroke(strokeColor);
+  fill(fillColor);
+
+  // Draw shapes based on shapeType
+  if (shapeType === 0) {
+    ellipse(0, 0, size, size);
+  } else if (shapeType === 1) {
+    rect(-size / 2, -size / 2, size, size);
+  } else if (shapeType === 2) {
+    let x1 = random(-size / 2, size / 2);
+    let y1 = random(-size / 2, size / 2);
+    let x2 = random(-size / 2, size / 2);
+    let y2 = random(-size / 2, size / 2);
+    let x3 = random(-size / 2, size / 2);
+    let y3 = random(-size / 2, size / 2);
+    triangle(x1, y1, x2, y2, x3, y3);
+  }
+
+  // Add text with a probability of 20%
+  if (random() < 0.2) {
+    let textString = "I'm Ansh";
+    fill(0);
+    textSize(size * 0.5);
+    text(textString, 0, 0);
+  }
+}
+
+// Save the canvas when the "s" key is pressed
+function keyPressed() {
+  if (key === 's' || key === 'S') {
+    saveFile();
+  }
+  return false;
+}
+
+function saveFile() {
+  saveCanvas("MyGenArt " + frameCount + ".jpg");
+  print("File saved");
+}
+
+</script>
+</html>
